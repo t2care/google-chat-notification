@@ -28,9 +28,8 @@ export async function notify(name: string, url: string, status: Status) {
   const runNumber = github.context.runNumber;
   const repoUrl = `https://git.t2-technology.fr/${owner}/${repo}`;
   const eventPath = eventName === 'pull_request' ? `/pulls/${number}` : `/commit/${sha}`;
-  const actionsPath = `/actions/runs/${runNumber}`;
   const eventUrl = `${repoUrl}${eventPath}`;
-  const checksUrl = `${repoUrl}${actionsPath}`;
+  const checksUrl = `${repoUrl}/actions/runs/${runNumber}`;
 
   const body = {
     cards: [{
