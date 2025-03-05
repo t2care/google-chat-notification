@@ -2619,13 +2619,14 @@ const textButton = (text, url) => ({
 function notify(name, url, status) {
     return __awaiter(this, void 0, void 0, function* () {
         const { owner, repo } = github.context.repo;
-        const { eventName, ref } = github.context;
+        const { eventName, sha, ref } = github.context;
         const { number } = github.context.issue;
         const runNumber = github.context.runNumber;
         const repoUrl = `https://git.t2-technology.fr/${owner}/${repo}`;
-        const eventPath = eventName === 'pull_request' ? `/pulls/${number}` : `/actions/runs/${runNumber}`;
+        const eventPath = eventName === 'pull_request' ? `/pulls/${number}` : `/commit/${sha}`;
+        const actionsPath = `/actions/runs/${runNumber}`;
         const eventUrl = `${repoUrl}${eventPath}`;
-        const checksUrl = `${repoUrl}${eventPath}`;
+        const checksUrl = `${repoUrl}${actionsPath}`;
         const body = {
             cards: [{
                     sections: [
