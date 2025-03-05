@@ -2621,10 +2621,11 @@ function notify(name, url, status) {
         const { owner, repo } = github.context.repo;
         const { eventName, ref } = github.context;
         const { number } = github.context.issue;
+        const runNumber = github.context.runNumber;
         const repoUrl = `https://git.t2-technology.fr/${owner}/${repo}`;
-        const eventPath = eventName === 'pull_request' ? `/pull/${number}` : `/commit/${sha}`;
+        const eventPath = eventName === 'pull_request' ? `/pulls/${number}` : `/actions/runs/${runNumber}`;
         const eventUrl = `${repoUrl}${eventPath}`;
-        const checksUrl = `${repoUrl}${eventPath}/checks`;
+        const checksUrl = `${repoUrl}${eventPath}`;
         const body = {
             cards: [{
                     sections: [
