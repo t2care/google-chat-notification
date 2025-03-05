@@ -2619,10 +2619,11 @@ const textButton = (text, url) => ({
 function notify(name, url, status) {
     return __awaiter(this, void 0, void 0, function* () {
         const { owner, repo } = github.context.repo;
-        const { eventName, sha, ref } = github.context;
+        const { eventName, ref } = github.context;
         const { number } = github.context.issue;
+        const runNumber = github.context.runNumber;
         const repoUrl = `https://github.com/${owner}/${repo}`;
-        const eventPath = eventName === 'pull_request' ? `/pull/${number}` : `/commit/${sha}`;
+        const eventPath = eventName === 'pull_request' ? `/pulls/${number}` : `/actions/runs/${runNumber}`;
         const eventUrl = `${repoUrl}${eventPath}`;
         const checksUrl = `${repoUrl}${eventPath}/checks`;
         const body = {
